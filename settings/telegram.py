@@ -1,5 +1,3 @@
-from replit import db
-
 
 class Telegram:
 
@@ -11,6 +9,14 @@ class Telegram:
         string = "```\n"
         string += formattazione1.format("STAFF", "RUOLO") + '\n\n'
 
+        db = {
+            'staff': [
+                {
+                    'username_telegram': "xzan8189",
+                    'role': "Capo"
+                }
+            ]
+        }
         staff = db['staff']
         for staffer in staff: # Calcolo degli attacchi rimanenti di ogni giocatore
             string += formattazione2.format(staffer['username_telegram'], staffer['role'])
@@ -18,6 +24,12 @@ class Telegram:
             string += '\n'
 
         return string + '```'
+
+    @staticmethod
+    def info():
+        string = "Il mio creatore è quest'uomo, vi linko il suo profilo Github: https://github.com/xzan8189"
+
+        return string
 
 if __name__ == '__main__':
     staff = Telegram.get_staff()

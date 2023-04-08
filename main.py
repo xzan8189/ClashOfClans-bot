@@ -1,11 +1,9 @@
 import os
 
-from telegram.ext.callbackcontext import CallbackContext
-from telegram.ext.commandhandler import CommandHandler
-from telegram.ext.filters import Filters
-from telegram.ext.messagehandler import MessageHandler
-from telegram.ext.updater import Updater
-from telegram.update import Update
+from telegram.ext import CallbackContext
+from telegram.ext import CommandHandler
+from telegram.ext import Updater
+from telegram import Update
 from webserver import keep_alive
 from settings.telegram import Telegram
 from settings.clash_of_clans import Clash_of_clans
@@ -31,6 +29,15 @@ def attacchi_rimanenti(update: Update, context: CallbackContext):
                              parse_mode='MarkdownV2')
 
 
+def risultati_ultima_war(update: Update, context: CallbackContext):
+    context.bot.send_message(update.message.chat_id,
+                             text="Risultati della war:")
+    string = Clash_of_clans.result_last_war()
+    context.bot.send_message(update.message.chat_id,
+                             text=string,
+                             parse_mode='MarkdownV2')
+
+
 def staff(update: Update, context: CallbackContext):
     string = Telegram.get_staff()
     context.bot.send_message(update.message.chat_id,
@@ -41,6 +48,12 @@ def staff(update: Update, context: CallbackContext):
 def help(update: Update, context: CallbackContext):
     update.message.reply_text("""Available Commands :
 	/attacchi_rimanenti - Scopri quanti attacchi rimangono nella war!""")
+
+
+def info(update: Update, context: CallbackContext):
+    string = Telegram.info()
+    context.bot.send_message(update.message.chat_id,
+                             text=string)
 
 
 def unknown(update: Update, context: CallbackContext):
@@ -55,11 +68,14 @@ def unknown_text(update: Update, context: CallbackContext):
 
 updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(
-    CommandHandler('Attacchi_rimanenti', attacchi_rimanenti))
+    CommandHandler('Attacchi_rimanenti', attacchi_rimanenti)
+)
+updater.dispatcher.add_handler(CommandHandler('Risultati_ultima_war', risultati_ultima_war))
 updater.dispatcher.add_handler(CommandHandler('Staff', staff))
+updater.dispatcher.add_handler(CommandHandler('info', info))
 updater.dispatcher.add_handler(CommandHandler('help', help))
-#updater.dispatcher.add_handler(MessageHandler(Filters.text, unknown))
-#updater.dispatcher.add_handler(MessageHandler(Filters.command, unknown))  # Filters out unknown commands
+# updater.dispatcher.add_handler(MessageHandler(Filters.text, unknown))
+# updater.dispatcher.add_handler(MessageHandler(Filters.command, unknown))  # Filters out unknown commands
 
 # Start Bot
 keep_alive()
