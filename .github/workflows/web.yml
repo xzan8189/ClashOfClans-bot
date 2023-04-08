@@ -15,8 +15,8 @@ jobs:
         sudo apt-get update
         sudo apt-get -y install python3
     - name: Build project
-      run: |
-        python3 main.py
       env:
         Clash_of_clans_API_token: ${{ secrets.CLASH_OF_CLANS_API_TOKEN }}
         Bot_token: ${{ secrets.BOT_TOKEN }}
+      run: |
+        python3 main.py
