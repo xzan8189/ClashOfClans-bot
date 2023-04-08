@@ -2,7 +2,7 @@ import os
 import requests
 from datetime import datetime
 
-COC_TOKEN = os.environ['Clash_of_clans_API_token']
+COC_TOKEN = process.env.Clash_of_clans_API_token
 
 headers = {
     'Accept': 'application/json',

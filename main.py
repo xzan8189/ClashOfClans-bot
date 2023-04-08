@@ -8,8 +8,8 @@ from webserver import keep_alive
 from settings.telegram import Telegram
 from settings.clash_of_clans import Clash_of_clans
 
-BOT_TOKEN = os.environ['Bot_token']
-COC_TOKEN = os.environ['Clash_of_clans_API_token']
+BOT_TOKEN = process.env.Bot_token
+COC_TOKEN = process.env.Clash_of_clans_API_token
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.message.from_user
