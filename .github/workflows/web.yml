@@ -9,13 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
     - name: Installando prerequisiti
-      env:
-        Clash_of_clans_API_token: ${{ secrets.Clash_of_clans_API_token }}
-        Bot_token: ${{ secrets.Bot_token }}
       run: |
         sudo apt-get update
         sudo apt-get -y install python3
     - name: Build project
       run: |
         python3 main.py
+      env:
+        Clash_of_clans_API_token: ${{ secrets.Clash_of_clans_API_token }}
+        Bot_token: ${{ secrets.Bot_token }}
