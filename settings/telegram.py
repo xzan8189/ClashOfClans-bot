@@ -1,3 +1,6 @@
+import json
+from decimal import Decimal
+
 
 class Telegram:
 
@@ -9,15 +12,8 @@ class Telegram:
         string = "```\n"
         string += formattazione1.format("STAFF", "RUOLO") + '\n\n'
 
-        db = {
-            'staff': [
-                {
-                    'username_telegram': "xzan8189",
-                    'role': "Capo"
-                }
-            ]
-        }
-        staff = db['staff']
+        with open("data.json") as json_file:
+            staff = json.load(json_file, parse_float=Decimal)
         for staffer in staff: # Calcolo degli attacchi rimanenti di ogni giocatore
             string += formattazione2.format(staffer['username_telegram'], staffer['role'])
 
