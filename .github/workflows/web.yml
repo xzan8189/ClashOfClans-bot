@@ -31,4 +31,4 @@ jobs:
         Clash_of_clans_API_token: ${{ secrets.CLASH_OF_CLANS_API_TOKEN }}
         Bot_token: ${{ secrets.BOT_TOKEN }}
       run: |
-        main.py
+        python main.py
